@@ -1,5 +1,6 @@
 <script lang="ts">
     import dayjs from 'dayjs';
+	import 'dayjs/locale/ru';
     import relativeTime from 'dayjs/plugin/relativeTime';
     import GameTable from '$lib/gameTable.svelte';
 
@@ -9,9 +10,9 @@
 	export let data;
 </script>
 <svelte:head>
-    <title>The official WOKE games ranking</title>
-    <meta name="title" content="The official WOKE games ranking" />
-    <meta name="description" content="the ultimate list of WOKE games!!!" />
+    <title>Официальный рейтинг ПОВЕСТОЧНЫХ игр</title>
+    <meta name="title" content="Официальный список ПОВЕСТОЧНЫХ игр" />
+    <meta name="description" content="самый полный список ПОВЕСТОЧНЫХ игр!!!" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -29,21 +30,22 @@
 </svelte:head>
 <div class="pad-l">
     <center>
-        <h1 style="margin-bottom: 0.2rem">The Woke Ranking</h1>
-        (from the woke content detector steam group)<br><br>
-        <footer>click <a href="/">here</a> to compare your steam games to this list<br>
-        csv available <a data-sveltekit-reload href="/data.csv">here</a>, last updated {dayjs(data.lastUpdate).fromNow()}</footer>
+        <h1 style="margin-bottom: 0.2rem">Рейтинг повестки</h1>
+        (по данным группы woke content detector в steam)<br><br>
+        <footer>нажми <a href="/">здесь</a>, чтобы узнать статистику по своему профилю<br>
+        csv-файл доступен <a data-sveltekit-reload href="/data.csv">здесь</a>, последнее обновление {dayjs(data.lastUpdate).locale('ru').fromNow()}</footer>
     </center>
     <div>
         <GameTable games={data.games} let:all let:filtered>
-            <h2>Game List ({all} total{#if all !== filtered}, {filtered} results{/if})</h2>
+            <h2>Список игр (всего в списке: {all}{#if all !== filtered}, результатов: {filtered}{/if})</h2>
         </GameTable>
     </div>
 </div>
 
 <footer>
-    list last updated on {dayjs(data.lastUpdate).toDate().toLocaleString()} ({dayjs(data.lastUpdate).fromNow()})<br>
-    *this list was compiled from the woke content detector steam group. i am <span style="color: red; font-weight: bold">NOT</span> associated with it, nor do i endorse any of the comments it makes. 
-    <span style="color: black; font-weight: bold">this website was made as a joke.</span>
+    в последний раз список обновлялся {dayjs(data.lastUpdate).toDate().toLocaleString()} ({dayjs(data.lastUpdate).locale('ru').fromNow()}), полный список можно посмотреть <a href="/full-list">здесь</a><br>
+    *этот список составлен по данным группы woke content detector в steam. я с ней <span style="color: red; font-weight: bold">НЕ</span> связан и совершаемые ею высказывания не одобряю. 
+    <span style="color: black; font-weight: bold">данный сайт создан в юмористических целях.</span><br>
+	**хотя предыдущее* заявление сделал <a href="https://cirnoslab.me/">оригинальный разработчик</a> сайта, <a href="https://github.com/The518thGuy">я</a>, будучи его переводчиком, полностью его поддерживаю.
 </footer>
 

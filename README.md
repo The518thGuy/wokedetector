@@ -1,18 +1,18 @@
-# The Woke Detector
-Have you ever wondered how WOKE the games you play are?  
-Well, you can have your answer now with THE WOKE DETECTOR!!!
-## [ACCESS HERE](https://wokedetector.cirnoslab.me)
-## Development
-Install `bun`. I can't guarantee that it works (with anything else).  
-The only thing this requires is a [Steam Web API key](https://steamcommunity.com/dev/apikey).  
-Put it in a .env file like this:
+# Детектор повестки (The Woke Detector)
+Вы когда-нибудь задумывались, насколько ПОВЕСТОЧНЫЕ игры, в которые вы играете?  
+Что ж, наше средство поможет вам найти ответ на этот вопрос — встречайте ДЕТЕКТОР ПОВЕСТКИ!!!
+## [ПЕРЕВОДЧЕСКИЙ ФОРК ДАННОГО ПРОЕКТА](https://github.com/marukyuunet/wokedetector)
+## Разработка
+Установите `bun`. Работа (в каком-либо другом окружении) не гарантируется.  
+Единственное, что требуется, — [ключ веб-API Steam](https://steamcommunity.com/dev/apikey).  
+Вставьте его в безымянный файл .env следующим образом:
 ```
-STEAM_API_KEY=WHATEVERURSTEAMAPIKEYISLOL
+STEAM_API_KEY=ЧИСТОВАШСТИМОВСКИЙАПИКЛЮЧЛОЛ
 ```
-and put said .env file in this root folder (if running in dev) or in the "path" specified in ecosystem.config.cjs (if deploying to production).  
-Run `bun install` to instal dependencies, `bun get-list` to download the games list, and `bun dev` to open up a dev instance.  
-Run `bun build` to build a Node.js instance (it will automatically download the games list every time it does this).  
-If you want to deploy this for some insane reason, you can change where ecosystem.config.cjs points to. (it expects both Bun and Node.js to be installed, the latter through nvm with pm2)  
-You can also set up a cron job to run update.sh.
-## Disclaimer
-This website was made as a joke. I am not affiliated with the Woke Content Detector Steam group and do not endorse any of its comments. Do not expect support for anything here.
+и поместите этот файл в корневую папку (для работы с dev-инстансом) или по пути, указанному в качестве значения path в файле ecosystem.config.cjs (для выпуска).  
+Запустите команду `bun install`, чтобы установить зависимости, `bun get-list` — чтобы скачать список игр (он будет на английском и, скорее всего, актуален на 8 марта 2025 г., так что я его уже сюда положил и буду переводить на русский) и `bun dev` — чтобы открыть dev-инстанс.  
+Запустите команду `bun build`, чтобы собрать инстанс Node.js (при каждой сборке список игр будет скачиваться заново).  
+Если по какой-то феррюкнутой причине вы захотите это дело выпустить, то можете подкрутить значения в файле ecosystem.config.cjs (желательно для этого установить Bun и Node.js, но если есть pm2, то на последнее можно забить).  
+Ещё можно создать регулярную задачу, которая будет запускать update.sh каждый день (перевод таблицы будет заменён английским текстом — и, опять-таки, обзоры для неё не обновлялись ещё с 2025 года, так что это немножко бессмысленно).
+## Дисклеймер
+Этот сайт создан в юмористических целях. Ни я, ни оригинальный разработчик никоим образом не связаны с группой Woke Content Detector в Steam и не одобряем совершаемые ею высказывания. Не ожидайте никакой поддержки чего-либо.

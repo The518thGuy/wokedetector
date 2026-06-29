@@ -1,6 +1,7 @@
 <script lang="ts">
     import he from 'he';
     import dayjs from 'dayjs';
+	import 'dayjs/locale/ru';
     import relativeTime from 'dayjs/plugin/relativeTime';
 
     dayjs.extend(relativeTime);
@@ -33,9 +34,9 @@
 <svelte:head>
     {#if data.found && games}
     <!-- Primary Meta Tags -->
-    <title>how WOKE are {data.info.name}'s games???</title>
-    <meta name="title" content="how WOKE are {data.info.name}'s games???" />
-    <meta name="description" content="find out how woke {data.info.name}'s steam library is today!!" />
+    <title>насколько ПОВЕСТОЧНЫЕ игры у {data.info.name}???</title>
+    <meta name="title" content="насколько ПОВЕСТОЧНЫЕ игры у {data.info.name}???" />
+    <meta name="description" content="узнай, насколько библиотека у {data.info.name} повесточная, уже сегодня!!" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -51,9 +52,9 @@
     <meta property="twitter:description" content="find out how woke {data.info.name}'s steam library is today!!" />
     <meta property="twitter:image" content="{data.info.avatar}" />
     {:else}
-    <title>how WOKE are your games???</title>
-    <meta name="title" content="how WOKE are your games???" />
-    <meta name="description" content="find out how woke your steam library is today with this simple tool!!" />
+    <title>насколько твои игры ПОВЕСТОЧНЫЕ???</title>
+    <meta name="title" content="насколько твои игры ПОВЕСТОЧНЫЕ???" />
+    <meta name="description" content="узнай, насколько твоя библиотека повесточная, уже сегодня!!" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -72,68 +73,68 @@
 </svelte:head>
 <div class="pad-l">
     <center>
-        <h1>how WOKE are your games???</h1>
-        find out today with our special WOKE DETECTOR!!!
+        <h1>насколько твои игры ПОВЕСТОЧНЫЕ???</h1>
+        узнай сегодня с нашим новым ДЕТЕКТОРОМ ПОВЕСТКИ!!!
         <div class="center-box">
             <form>
-                <label for="steamid">enter ur steamid/profile url here:</label>
+                <label for="steamid">steamid или ссылка на твой стим:</label>
                 <input type="text" class="textbox" id="steamid" bind:value={steamid} on:keypress={(k) => k.key === "Enter" && button.click()}>
-                <a href={"/" + encodeURIComponent(steamid)} bind:this={button} id="reveal" class="btn">REVEAL</a>
+                <a href={"/" + encodeURIComponent(steamid)} bind:this={button} id="reveal" class="btn">УЗНАТЬ</a>
             </form>
-            (if you're not sure check <a href="https://steamdb.info/calculator/" target="_blank">SteamDB</a> and get the "SteamID" from there)
+            (если не знаешь, зайди на <a href="https://steamdb.info/calculator/" target="_blank">SteamDB</a> и возьми оттуда значение "SteamID")
         </div>
         
         <div>
             {#if $page.params.id}
                 {#if data.found && data.info}
                     <div>
-                        <img src={data.info.avatar} alt={data.info.name + "'s Steam Avatar"} class="avatar">
-                        <span style="font-weight: bold; font-size: 1.7rem; margin-left: 0.5rem; vertical-align: middle;">{decode(data.info.name)}'s Profile</span>
+                        <img src={data.info.avatar} alt={"Аватар " + data.info.name + " в Steam"} class="avatar">
+                        <span style="font-weight: bold; font-size: 1.7rem; margin-left: 0.5rem; vertical-align: middle;">Профиль {decode(data.info.name)}</span>
                     </div>
                     {#if games}
                         {#if games.count.counted > 0}
                             <div style="margin-top: 0.5rem;">
-                                Calculate wokeness by:<br>
+                                Рассчитывать повестку по:<br>
                                 <label>
-                                    <input type="radio" name="calculateBy" value="playtime" bind:group={calculateBy}> Playtime
+                                    <input type="radio" name="calculateBy" value="playtime" bind:group={calculateBy}> времени в игре
                                 </label>
                                 <label>
-                                    <input type="radio" name="calculateBy" value="games" bind:group={calculateBy}> Number of games
+                                    <input type="radio" name="calculateBy" value="games" bind:group={calculateBy}> количеству игр
                                 </label>
                             </div>
                             
-                            <h2>Result: 
+                            <h2>Результат: 
                                 {#if wokePercentage > 65 || wokePercentage + slightlyWokePercentage > 75}
-                                    <span style="color: #ff0000">WOKE!!!!!</span>
+                                    <span style="color: #ff0000">ВСЁ В ПОВЕСТКЕ!!!!!</span>
                                 {:else if wokePercentage > 40 || wokePercentage + slightlyWokePercentage > 50}
-                                    <span style="color: #e0c600">SLIGHTLY WOKE...</span>
+                                    <span style="color: #e0c600">НЕМНОЖКО ПОВЕСТОЧКИ...</span>
                                 {:else}
-                                    <span style="color: #00ff00">NOT WOKE!!</span>
+                                    <span style="color: #00ff00">ПОВЕСТКИ НЕТ!!</span>
                                 {/if}<br>
                             </h2>
                             <div class="bar">
                                 <div class="woke tooltip" class:left-edge={wokePercentage > 0} style:width="{wokePercentage}%">
-                                    <div class="target">Woke: {wokePercentage.toFixed(2)}%</div>
+                                    <div class="target">Явно: {wokePercentage.toFixed(2)}%</div>
                                 </div>
                                 <div class="slightly tooltip" class:left-edge={wokePercentage === 0} class:right-edge={wokePercentage + slightlyWokePercentage >= 100} style:width="{slightlyWokePercentage}%">
-                                    <div class="target">Slightly: {slightlyWokePercentage.toFixed(2)}%</div>
+                                    <div class="target">Частично: {slightlyWokePercentage.toFixed(2)}%</div>
                                 </div>
                                 <div class="notwoke tooltip right-edge" class:left-edge={wokePercentage + slightlyWokePercentage === 0} style:width="{100 - (wokePercentage + slightlyWokePercentage)}%">
-                                    <div class="target">Not Woke: {(100 - (wokePercentage + slightlyWokePercentage)).toFixed(2)}%</div>
+                                    <div class="target">Без повестки: {(100 - (wokePercentage + slightlyWokePercentage)).toFixed(2)}%</div>
                                 </div>
                             </div>
-                        <footer>(tap/hover to view percentage)</footer>
+                        <footer>(нажми или наведись, чтобы увидеть долю в процентах)</footer>
                         {:else}
-                            we detected games in your library, but none of them could be counted.
+                            мы обнаружили в твоей библиотеке игры, но рассчитать их не можем.
                         {/if}
                     {:else}
-                        sorry, we couldn't obtain this player's games. try checking privacy settings.<br>(games have to be set to public for this to work)
+                        извини, мы не смогли получить список игр. проверь настройки приватности.<br>(доступ к игровой информации должен быть открыт)
                     {/if}
                 {:else}
                     {#if data.error}
-                        vanity lookup failed. try using the Steam64 ID directly.
+                        не удалось выполнить поиск по личной ссылке. попробуй ввести Steam64 ID.
                     {:else}
-                        player not found! check ur SteamIDs
+                        игрок не найден! перепроверь SteamID
                     {/if}
                 {/if}
             {/if}
@@ -142,11 +143,11 @@
     {#if games}
     <div>
         <GameTable paginate={false} games={games.list} showPlaytime let:all let:filtered>
-            <h2>Game List ({all} counted{#if all !== filtered}, {filtered} results{/if})</h2>
+            <h2>Список игр (всего в списке: {all}{#if all !== filtered}, результатов: {filtered}{/if})</h2>
             {#if calculateBy === "games"}
-                <footer style="margin-bottom: 0.5rem;">(counted {games.count.counted}/{games.count.all} games or {(games.count.counted/games.count.all*100).toFixed(2)}%)</footer>
+                <footer style="margin-bottom: 0.5rem;">(учитывается {games.count.counted} из {games.count.all} игр, что составляет {(games.count.counted/games.count.all*100).toFixed(2)}%)</footer>
             {:else}
-                <footer style="margin-bottom: 0.5rem;">(counted {(games.playtime.counted/60).toFixed(1)}/{(games.playtime.all/60).toFixed(1)} hours or {(games.playtime.counted/games.playtime.all*100).toFixed(2)}%)</footer>
+                <footer style="margin-bottom: 0.5rem;">(учитывается {(games.playtime.counted/60).toFixed(1)} ч из {(games.playtime.all/60).toFixed(1)} ч, что составляет {(games.playtime.counted/games.playtime.all*100).toFixed(2)}%)</footer>
             {/if}
         </GameTable>
     </div>
@@ -154,7 +155,8 @@
 </div>
 
 <footer>
-    list last updated on {dayjs(data.lastUpdate).toDate().toLocaleString()} ({dayjs(data.lastUpdate).fromNow()}), you can view the full list <a href="/full-list">here</a><br>
-    *this list was compiled from the woke content detector steam group. i am <span style="color: red; font-weight: bold">NOT</span> associated with it, nor do i endorse any of the comments it makes. 
-    <span style="color: black; font-weight: bold">this website was made as a joke.</span>
+    в последний раз список обновлялся {dayjs(data.lastUpdate).toDate().toLocaleString()} ({dayjs(data.lastUpdate).locale('ru').fromNow()}), полный список можно посмотреть <a href="/full-list">здесь</a><br>
+    *этот список составлен по данным группы woke content detector в steam. я с ней <span style="color: red; font-weight: bold">НЕ</span> связан и совершаемые ею высказывания не одобряю. 
+    <span style="color: black; font-weight: bold">данный сайт создан в юмористических целях.</span><br>
+	**хотя предыдущее* заявление сделал <a href="https://cirnoslab.me/">оригинальный разработчик</a> сайта, <a href="https://github.com/The518thGuy">я</a>, будучи его переводчиком, полностью его поддерживаю.
 </footer>
